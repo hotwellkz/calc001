@@ -139,13 +139,44 @@ server: {
 
 ### Деплой
 
+#### Netlify (рекомендуется)
+
+1. **Подключите репозиторий GitHub:**
+   - Зайдите в [Netlify Dashboard](https://app.netlify.com)
+   - Нажмите "Add new site" → "Import an existing project"
+   - Выберите репозиторий `hotwellkz/calc001`
+
+2. **Настройки сборки (должны определиться автоматически из `netlify.toml`):**
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+   - Node version: 18.x или выше (можно указать в `.nvmrc` или настройках Netlify)
+
+3. **Важно:** 
+   - Убедитесь, что в настройках сайта включена опция "Deploy settings" → "Build settings" используют `netlify.toml`
+   - Файл `netlify.toml` уже настроен с правильными MIME типами для JavaScript модулей
+   - Если после деплоя видите белый экран, проверьте консоль браузера - возможно нужно пересобрать сайт
+
+4. После деплоя сайт будет доступен по адресу типа `https://your-site.netlify.app`
+
+5. **Настройка кастомного домена:**
+   - В настройках сайта → Domain settings
+   - Добавьте свой домен (например, `calculator.hotwell.kz`)
+   - Настройте DNS записи согласно инструкциям Netlify
+
+#### Другие хостинги
+
 После сборки (`npm run build`) файлы из папки `dist/` нужно загрузить на хостинг:
 
-1. **Статический хостинг** (Netlify, Vercel, GitHub Pages):
-   - Просто загрузите содержимое `dist/` в корень сайта
-   - Настройте редирект всех путей на `index.html` (для SPA)
+1. **Vercel:**
+   - Подключите репозиторий
+   - Build command: `npm run build`
+   - Output directory: `dist`
 
-2. **Nginx конфигурация:**
+2. **GitHub Pages:**
+   - Используйте GitHub Actions для автоматической сборки
+   - Или загрузите содержимое `dist/` в ветку `gh-pages`
+
+3. **Nginx конфигурация:**
 ```nginx
 server {
     listen 80;
