@@ -4,6 +4,7 @@ import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [react()],
+  base: '/',
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
@@ -13,12 +14,16 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: false,
     minify: 'esbuild',
+    assetsDir: 'assets',
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
           icons: ['lucide-react'],
         },
+        assetFileNames: 'assets/[name].[ext]',
+        chunkFileNames: 'assets/[name].[hash].js',
+        entryFileNames: 'assets/[name].[hash].js',
       },
     },
   },

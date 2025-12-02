@@ -1,0 +1,12 @@
+/assets/*.js
+  Content-Type: application/javascript; charset=utf-8
+
+/assets/*.mjs
+  Content-Type: application/javascript; charset=utf-8
+
+/assets/*.css
+  Content-Type: text/css; charset=utf-8
+
+/*
+  X-Frame-Options: ALLOWALL
+  Content-Security-Policy: frame-ancestors 'self' https://hotwell.kz https://*.hotwell.kz;
