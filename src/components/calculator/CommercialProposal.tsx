@@ -207,18 +207,25 @@ HotWell.kz - Быстровозводимые дома из СИП-панеле�
         },
       };
 
-      await html2pdf()
+      if (!pdfExportRef.current) {
+        throw new Error('PDF element not found');
+      }
+
+      const pdfDoc = await html2pdf()
         .set(pdfOptions)
         .from(pdfExportRef.current)
         .toPdf()
-        .get('pdf')
-        .then((pdf: any) => {
-          const totalPages = pdf.internal.getNumberOfPages();
-          pdf.setPage(totalPages);
-          pdf.setFontSize(8);
-          pdf.setTextColor(100, 100, 100);
-          pdf.text('Сформировано в системе HotWell.kz', 150, 285);
-        })
+        .get('pdf');
+      
+      const totalPages = pdfDoc.internal.getNumberOfPages();
+      pdfDoc.setPage(totalPages);
+      pdfDoc.setFontSize(8);
+      pdfDoc.setTextColor(100, 100, 100);
+      pdfDoc.text('Сформировано в системе HotWell.kz', 150, 285);
+      
+      await html2pdf()
+        .set(pdfOptions)
+        .from(pdfExportRef.current)
         .save();
 
       if (exportBtn) {

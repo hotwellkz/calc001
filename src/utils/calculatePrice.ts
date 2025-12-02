@@ -177,11 +177,6 @@ export const calculatePrice = (params: CalculatorInput): CalculationResult => {
   const ceilingAddition = getCeilingAddition(params.ceiling);
   const roofAddition = getRoofAddition(params.roofType, params.floors);
   const houseShapeAddition = getHouseShapeAddition(params.houseShape);
-  const additionalWorksAddition = getAdditionalWorksAddition(
-    params.additionalWorks, 
-    params.useCustomWorks, 
-    params.customWorks
-  );
 
   // Формула итогового расчёта
   const pricePerSqm = basePrice + 
