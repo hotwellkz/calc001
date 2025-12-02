@@ -8,7 +8,8 @@
   to = "/index.html"
   status = 200
 
-# Правильные MIME типы для JavaScript модулей из папки assets
+# Правильные MIME типы для JavaScript модулей
+# Vite генерирует файлы в /assets/ с хешами
 [[headers]]
   for = "/assets/*.js"
   [headers.values]
@@ -27,7 +28,18 @@
     Content-Type = "text/css; charset=utf-8"
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Заголовки для iframe
+# Также обрабатываем файлы без расширения (если есть)
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Content-Type = "application/javascript; charset=utf-8"
+
+[[headers]]
+  for = "/*.mjs"
+  [headers.values]
+    Content-Type = "application/javascript; charset=utf-8"
+
+# Заголовки для iframe (применяются ко всем файлам)
 [[headers]]
   for = "/*"
   [headers.values]
